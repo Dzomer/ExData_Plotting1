@@ -1,0 +1,8 @@
+setwd("~/Coursera/ExData_Plotting1")
+png(file="plot1.png", width = 480, height = 480)
+x <-read.table("household_power_consumption.txt",header = TRUE, sep = ";",stringsAsFactors = FALSE)
+x$Date <- as.Date(x$Date,"%d/%m/%Y")
+x$Time <-strptime(paste(x$Date,x$Time),"%Y-%m-%d %H:%M:%S")
+y<-subset(x,x$Date=="2007-02-01" | x$Date =="2007-02-02")
+with(subset(y,Global_active_power!="?"),hist(as.numeric(y$Global_active_power),col="red",main="Global Active Power",xlab="Global Active Power (kilowatts)"))
+dev.off()
